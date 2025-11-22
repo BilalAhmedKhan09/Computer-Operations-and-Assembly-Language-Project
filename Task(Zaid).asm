@@ -12,7 +12,7 @@ target dword ?
 targetInput byte "Enter number to find: ", 0
 found byte "Found at index ", 0
 notFound byte "Does not exist!", 0
-
+timeMsg byte "Time Taken (ms) = ",0
 .code
 
 LinearSearch proc
@@ -208,7 +208,48 @@ main proc
     call writestring
     call readint
     mov target, eax
+
+    ;Linear Search:
+    call GetMseconds
+    push eax                             ; push start time
+    call LinearSearch
+    call GetMseconds
+    pop ebx                              ; pop start time into ebx
+    sub eax, ebx
+
+    mov edx, offset timeMsg
+    call WriteString
+    call WriteDec
+    call Crlf
+
+
+    ;Binary Search:
+    call GetMseconds
+    push eax                             ; push start time
+    call BinarySearch
+    call GetMseconds
+    pop ebx                              ; pop start time into ebx
+    sub eax, ebx
+
+    mov edx, offset timeMsg
+    call WriteString
+    call WriteDec
+    call Crlf
+
+
+    ;Interpolation Search:
+
+    call GetMseconds
+    push eax                             ; push start time
     call InterpolationSearch
+    call GetMseconds
+    pop ebx                              ; pop start time into ebx
+    sub eax, ebx
+
+    mov edx, offset timeMsg
+    call WriteString
+    call WriteDec
+    call Crlf
 
     exit
 main endp
