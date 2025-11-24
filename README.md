@@ -1,1 +1,1 @@
-# Computer Operations and Assembly Language
+# Computer Organization and Assembly Language
